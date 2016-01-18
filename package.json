@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:js": "browserify src/js/main.js -t babelify -d -o public/bundle.js --extension .jsx",
-    "build:sass": "node-sass src/sass/bundle.scss -o public/",
-    "build": "npm run build:js && npm run build:sass",
+    "build:server": "babel -d dist server",
+    "build:js": "browserify client/js/main.js -t babelify -d -o public/bundle.js --extension .jsx",
+    "build:sass": "node-sass client/sass/bundle.scss -o public/",
+    "build:client": "npm run build:js && npm run build:sass",
+    "build": "npm run build:client & npm run build:server",
     "watch:js": "watch 'npm run build:js' src/js",
     "watch": "parallelshell 'npm run watch:js' 'npm run build:sass -- --watch'",
     "livereload": "parallelshell 'livereload public' 'npm run watch'",
-    "start": "node main.js"
+    "start": "node dist/main.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.2.0",

@@ -11,12 +11,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, './public')))
+app.use(express.static(path.join(__dirname, '../public')))
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  console.log(404, req.hostname, req.url)
   const err = new Error('Not Found')
-
   err.status = 404
   next(err)
 })
