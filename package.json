@@ -3,18 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:server": "babel -d dist server",
-    "build:js": "browserify client/js/main.js -t babelify -d -o public/bundle.js --extension .jsx",
+    "build:server": "coffee -c  -o dist server/",
+    "build:js": "browserify client/js/main.coffee -t coffee-reactify --extension=\".cjsx\" --extension=\".coffee\" -d -m -o public/bundle.js --extension .jsx",
     "build:sass": "node-sass client/sass/bundle.scss -o public/",
     "build:client": "npm run build:js && npm run build:sass",
     "build": "npm run build:client & npm run build:server",
-    "watch:js": "watch 'npm run build:js' src/js",
+    "watch:js": "watch 'npm run build:js' client/js",
     "watch": "parallelshell 'npm run watch:js' 'npm run build:sass -- --watch'",
     "livereload": "parallelshell 'livereload public' 'npm run watch'",
     "start": "node dist/main.js"
   },
   "dependencies": {
-    "babel-polyfill": "^6.2.0",
     "body-parser": "~1.10.2",
     "config": "^1.17.1",
     "cookie-parser": "~1.3.3",
@@ -25,12 +24,10 @@
     "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.2.0",
-    "babel-core": "^6.2.1",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "coffee-react": "^4.1.0",
+    "coffee-reactify": "^4.0.0",
+    "coffeeify": "^2.0.1",
     "eslint": "^1.10.0",
     "eslint-plugin-react": "^3.9.0",
     "history": "^1.13.1",
